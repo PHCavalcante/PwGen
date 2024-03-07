@@ -4,6 +4,9 @@ import random
 def main(page: ft.Page):
     page.title = "PwGen"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.window_width = 400
+    page.window_height = 450
+    page.window_resizable = True
     page.update()
 
     # remember to add max lines propriety here later
