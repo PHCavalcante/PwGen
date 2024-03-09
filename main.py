@@ -60,9 +60,7 @@ def main(page: ft.Page):
             for i in range(int(passwordlenght.value)):
                 password += random.choice(numbers + special_chars)
 
-        print(password)
         passwordfiled.value = password
-        print(passwordfiled.value)
         page.update()
 
     generatebutton = ft.FilledButton(text="Generate Password", on_click=generating_password)
