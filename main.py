@@ -4,8 +4,8 @@ import random
 def main(page: ft.Page):
     page.title = "PwGen"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.window_width = 400
-    page.window_height = 450
+    page.window_width = 650
+    page.window_height = 550
     page.window_resizable = True
     page.update()
 
@@ -17,29 +17,29 @@ def main(page: ft.Page):
     specialcharacters = ft.Checkbox(label="Include Special Characters?", value=True)
 
     def slider_change(e):
-        valuetext.value = f"Password lenght is: {int(e.control.value)}"
+        valuetext.value = f"Password length is: {int(e.control.value)}"
         page.update()
 
     valuetext = ft.Text()
-    lenghttext = ft.Text("Select the password lenght")
+    lenghttext = ft.Text("Select the password length")
     passwordlenght = ft.Slider(min=8, max=120, divisions=120, label="{value}", adaptive=True, on_change=slider_change)
-    def generating_password(lenght):
+    def generating_password(self):
         chars = "abcdefghijklmnopqrstuvwxyz"
         upper = chars.upper()
         numbers = "0123456789"
         special_chars = "!@#$%&*_?|"
         allchars = chars + upper + numbers + special_chars
-
-        if uppercases.value == True and nums.value == True and specialcharacters.value == True:
+        if uppercases.value is True and nums.value is True and specialcharacters.value is True:
             password = ""
-            for i in range(lenght):
+            for i in range(20):
                 password += random.choice(allchars)
 
         print(password)
         passwordfiled.value = password
         print(passwordfiled.value)
+        page.update()
 
-    generatebutton = ft.FilledButton(text="Generate Password", on_click=generating_password(20))
+    generatebutton = ft.FilledButton(text="Generate Password", on_click=generating_password)
 
     page.add(passwordfiled, uppercases, nums, specialcharacters, lenghttext, passwordlenght, generatebutton, valuetext)
 
