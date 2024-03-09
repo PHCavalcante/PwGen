@@ -1,6 +1,7 @@
 import flet as ft
 import random
 
+
 def main(page: ft.Page):
     page.title = "PwGen"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
@@ -17,12 +18,13 @@ def main(page: ft.Page):
     specialcharacters = ft.Checkbox(label="Include Special Characters?", value=True)
 
     def slider_change(e):
-        valuetext.value = f"Password length is: {int(e.control.value)}"
+        valuetext.value = f"Password length is: {round(e.control.value)}"
         page.update()
 
     valuetext = ft.Text()
     lenghttext = ft.Text("Select the password length")
-    passwordlenght = ft.Slider(min=8, max=120, divisions=120, label="{value}", adaptive=True, on_change=slider_change)
+    passwordlenght = ft.Slider(min=8, max=120, divisions=120, label="{value}", adaptive=True, round=0, on_change=slider_change)
+
     def generating_password(self):
         chars = "abcdefghijklmnopqrstuvwxyz"
         upper = chars.upper()
@@ -31,7 +33,7 @@ def main(page: ft.Page):
         allchars = chars + upper + numbers + special_chars
         if uppercases.value is True and nums.value is True and specialcharacters.value is True:
             password = ""
-            for i in range(20):
+            for i in range(int(passwordlenght.value)):
                 password += random.choice(allchars)
 
         print(password)
@@ -44,4 +46,4 @@ def main(page: ft.Page):
     page.add(passwordfiled, uppercases, nums, specialcharacters, lenghttext, passwordlenght, generatebutton, valuetext)
 
 
-ft.app(target=main)
+ft.app(target=main, view=ft.WEB_BROWSER)
