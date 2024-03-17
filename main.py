@@ -60,24 +60,21 @@ def main(page: ft.Page) -> None:
         special_chars = "!@#$%&*_?|"
         allchars = chars + upper + numbers + special_chars
 
-        def dialog_popup():
-            popup = ft.AlertDialog(
-                modal=False,
-                title=ft.Text("Oops"),
-                content=ft.Text("Please select the password lenght!"),
-                actions=[ft.TextButton("Ok", on_click=close_popup)],
-                actions_alignment=ft.MainAxisAlignment.CENTER
-            )
-            page.add(popup)
-            return popup
-
-        def open_popup(popup):
-            page.dialog = popup
-            popup.open = True
+        def close_popup(self):
+            popup.open = False
             page.update()
 
-        def close_popup(popup):
-            popup.open = False
+        popup = ft.AlertDialog(
+            modal=False,
+            title=ft.Text("Oops"),
+            content=ft.Text("Please select the password lenght!"),
+            actions=[ft.TextButton("Ok", on_click=close_popup)],
+            actions_alignment=ft.MainAxisAlignment.CENTER
+        )
+
+        def open_popup():
+            page.dialog = popup
+            popup.open = True
             page.update()
 
         if uppercases.value is True and nums.value is True and specialcharacters.value is True:
@@ -86,56 +83,56 @@ def main(page: ft.Page) -> None:
                 for i in range(int(passwordlenght.value)):
                     password += random.choice(allchars)
             except:
-                open_popup(dialog_popup())
+                open_popup()
         elif uppercases.value is True and nums.value is False and specialcharacters.value is False:
             password = ""
             try:
                 for i in range(int(passwordlenght.value)):
                     password += random.choice(upper)
             except:
-                open_popup(dialog_popup())
+                open_popup()
         elif uppercases.value is True and nums.value is True and specialcharacters.value is False:
             password = ""
             try:
                 for i in range(int(passwordlenght.value)):
                     password += random.choice(upper + numbers)
             except:
-                open_popup(dialog_popup())
+                open_popup()
         elif uppercases.value is True and nums.value is False and specialcharacters.value is True:
             password = ""
             try:
                 for i in range(int(passwordlenght.value)):
                     password += random.choice(upper + special_chars)
             except:
-                open_popup(dialog_popup())
+                open_popup()
         elif uppercases.value is False and nums.value is True and specialcharacters.value is False:
             password = ""
             try:
                 for i in range(int(passwordlenght.value)):
                     password += random.choice(numbers)
             except:
-                open_popup(dialog_popup())
+                open_popup()
         elif uppercases.value is False and nums.value is False and specialcharacters.value is True:
             password = ""
             try:
                 for i in range(int(passwordlenght.value)):
                     password += random.choice(special_chars)
             except:
-                open_popup(dialog_popup())
+                open_popup()
         elif uppercases.value is False and nums.value is True and specialcharacters.value is True:
             password = ""
             try:
                 for i in range(int(passwordlenght.value)):
                     password += random.choice(numbers + special_chars)
             except:
-                open_popup(dialog_popup())
+                open_popup()
         elif uppercases.value is False and nums.value is False and specialcharacters.value is False:
             password = ""
             try:
                 for i in range(int(passwordlenght.value)):
                     password += random.choice(chars)
             except:
-                open_popup(dialog_popup())
+                open_popup()
 
         passwordfield.value = password
         page.update()
